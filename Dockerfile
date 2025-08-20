@@ -174,7 +174,7 @@ ARG OSX_SDK_SUM=518e35eae6039b3f64e8025f4525c1c43786cc5cf39459d609852faf091e34be
 ARG OSX_VERSION_MIN=10.14
 
 # OS X Cross - https://github.com/tpoechtrager/osxcross
-ARG OSX_CROSS_COMMIT=3d6a91c14a65b170aa50ecc3fda19dd6414e23a9
+ARG OSX_CROSS_COMMIT=f873f534c6cdb0776e457af8c7513da1e02abe59
 
 # Install OS X Cross
 # A Mac OS X cross toolchain for Linux, FreeBSD, OpenBSD and Android
