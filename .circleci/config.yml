@@ -1,0 +1,35 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@1.0.1
+
+jobs:
+  build-docker-image:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - docker/check:
+          registry: $DOCKER_REGISTRY
+      - docker/build:
+          image: $CIRCLE_PROJECT_REPONAME
+          tag: $CIRCLE_TAG
+          registry: $DOCKER_REGISTRY
+    push-docker-image:
+      - docker/push:
+          image: $CIRCLE_PROJECT_REPONAME
+          tag: $CIRCLE_TAG
+          registry: $DOCKER_REGISTRY
+
+workflows:
+  build-deploy:
+    jobs:
+      - build-docker-image
+      - push-docker-image
+     filters:
+        # only builds and pushes on tags
+        tags:
+          only: /[0-9]+\.[0-9]+(\.[0-9]+)?/
+        branches:
+          ignore: /.*/
+
