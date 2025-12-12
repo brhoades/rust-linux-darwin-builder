@@ -101,7 +101,7 @@ RUN set -eux \
     && ln -s /usr/include/asm-generic /usr/local/musl/include/asm-generic \
     && cd /tmp \
     && ver=$(echo $OPENSSL_VERSION | sed -e 's:\.:_:g') \
-    && curl -LO "https://github.com/openssl/openssl/releases/download/OpenSSL_${ver}/openssl-${OPENSSL_VERSION}.tar.gz" \
+    && curl -fLO "https://github.com/openssl/openssl/releases/download/OpenSSL_${ver}/openssl-${OPENSSL_VERSION}.tar.gz" \
     && tar xvzf "openssl-${OPENSSL_VERSION}.tar.gz" \
     && cd "openssl-${OPENSSL_VERSION}" \
     && env CC=musl-gcc ./Configure no-shared no-zlib -fPIC --prefix=/usr/local/musl -DOPENSSL_NO_SECURE_MEMORY ${config} "linux-$(uname -m)" \
@@ -121,7 +121,7 @@ ARG ZLIB_VERSION=1.3.1
 RUN set -eux \
     && echo "Building zlib ${ZLIB_VERSION}..." \
     && cd /tmp \
-    && curl -LO "https://www.zlib.net/fossils/zlib-${ZLIB_VERSION}.tar.gz" \
+    && curl -fLO "https://www.zlib.net/fossils/zlib-${ZLIB_VERSION}.tar.gz" \
     && tar xzf "zlib-${ZLIB_VERSION}.tar.gz" \
     && cd "zlib-${ZLIB_VERSION}" \
     && env CC=musl-gcc ./configure --static --prefix=/usr/local/musl \
@@ -137,7 +137,7 @@ ARG POSTGRESQL_VERSION=15.9
 RUN set -eux \
     && echo "Building libpq ${POSTGRESQL_VERSION}..." \
     && cd /tmp \
-    && curl -LO "https://ftp.postgresql.org/pub/source/v${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.tar.gz" \
+    && curl -fLO "https://ftp.postgresql.org/pub/source/v${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.tar.gz" \
     && tar xzf "postgresql-${POSTGRESQL_VERSION}.tar.gz" \
     && cd "postgresql-${POSTGRESQL_VERSION}" \
     && env CC=musl-gcc CPPFLAGS=-I/usr/local/musl/include LDFLAGS=-L/usr/local/musl/lib ./configure --with-openssl --without-readline --prefix=/usr/local/musl \
@@ -189,7 +189,7 @@ RUN set -eux \
 RUN set -eux \
     && echo "Building osxcross with ${OSX_SDK_VERSION}..." \
     && cd /usr/local/osxcross \
-    && curl -Lo "./tarballs/MacOSX${OSX_SDK_VERSION}.sdk.tar.xz" \
+    && curl -fLo "./tarballs/MacOSX${OSX_SDK_VERSION}.sdk.tar.xz" \
         "https://github.com/joseluisq/macosx-sdks/releases/download/${OSX_SDK_VERSION}/MacOSX${OSX_SDK_VERSION}.sdk.tar.xz" \
     && echo "${OSX_SDK_SUM}  ./tarballs/MacOSX${OSX_SDK_VERSION}.sdk.tar.xz" \
         | sha256sum -c - \
