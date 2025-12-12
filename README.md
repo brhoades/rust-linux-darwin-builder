@@ -11,7 +11,6 @@
 
 <div align="center">
 
-  [![Build Status](https://api.cirrus-ci.com/github/joseluisq/rust-linux-darwin-builder.svg)](https://cirrus-ci.com/github/joseluisq/rust-linux-darwin-builder) [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/joseluisq/rust-linux-darwin-builder/1)](https://hub.docker.com/r/joseluisq/rust-linux-darwin-builder/) [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/joseluisq/rust-linux-darwin-builder/1)](https://hub.docker.com/r/joseluisq/rust-linux-darwin-builder/tags) [![Docker Image](https://img.shields.io/docker/pulls/joseluisq/rust-linux-darwin-builder.svg)](https://hub.docker.com/r/joseluisq/rust-linux-darwin-builder/)
 
 </div>
 
@@ -19,7 +18,7 @@
 
 ## Overview
 
-This is a __Linux Docker image__ based on [ekidd/rust-musl-builder](https://hub.docker.com/r/ekidd/rust-musl-builder) but using the latest __Debian [12-slim](https://hub.docker.com/_/debian/tags?page=1&name=12-slim)__ ([Bookworm](https://www.debian.org/News/2023/20230610)).
+This is a __Linux Docker image__ based on [joseluisq/rust-linux-darwin-builder](https://github.com/joseluisq/rust-linux-darwin-builder) based on [ekidd/rust-musl-builder](https://hub.docker.com/r/ekidd/rust-musl-builder) but using the latest __Debian [12-slim](https://hub.docker.com/_/debian/tags?page=1&name=12-slim)__ ([Bookworm](https://www.debian.org/News/2023/20230610)).
 
 It contains essential tools for cross-compile [Rust](https://www.rust-lang.org/) projects such as __Linux__ static binaries via [musl-libc / musl-gcc](https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html) (`x86_64-unknown-linux-musl`) and __macOS__ binaries (`x86_64-apple-darwin`) via [osxcross](https://github.com/tpoechtrager/osxcross) just using the same Linux image.
 
@@ -42,7 +41,7 @@ Below are the default toolchains included in the Docker image.
 docker run --rm \
     --volume "${PWD}/sample":/root/src \
     --workdir /root/src \
-      joseluisq/rust-linux-darwin-builder:1.92.0 \
+      brhoades2/rust-linux-darwin-builder:1.92.0 \
         sh -c "cargo build --release --target x86_64-unknown-linux-musl"
 ```
 
@@ -52,7 +51,7 @@ docker run --rm \
 docker run --rm \
     --volume "${PWD}/sample":/root/src \
     --workdir /root/src \
-      joseluisq/rust-linux-darwin-builder:1.92.0 \
+      brhoades2/rust-linux-darwin-builder:1.92.0 \
         sh -c "cargo build --release --target x86_64-unknown-linux-gnu"
 ```
 
@@ -62,7 +61,7 @@ docker run --rm \
 docker run --rm \
     --volume "${PWD}/sample":/root/src \
     --workdir /root/src \
-      joseluisq/rust-linux-darwin-builder:1.92.0 \
+      brhoades2/rust-linux-darwin-builder:1.92.0 \
         sh -c "cargo build --release --target x86_64-apple-darwin"
 ```
 
@@ -74,7 +73,7 @@ docker run --rm \
 docker run --rm \
     --volume "${PWD}/sample":/root/src \
     --workdir /root/src \
-      joseluisq/rust-linux-darwin-builder:1.92.0 \
+      brhoades2/rust-linux-darwin-builder:1.92.0 \
         sh -c "cargo build --release --target aarch64-unknown-linux-gnu"
 ```
 
@@ -84,7 +83,7 @@ docker run --rm \
 docker run --rm \
     --volume "${PWD}/sample":/root/src \
     --workdir /root/src \
-      joseluisq/rust-linux-darwin-builder:1.92.0 \
+      brhoades2/rust-linux-darwin-builder:1.92.0 \
         sh -c "cargo build --release --target aarch64-unknown-linux-musl"
 ```
 
@@ -94,7 +93,7 @@ docker run --rm \
 docker run --rm \
     --volume "${PWD}/sample":/root/src \
     --workdir /root/src \
-      joseluisq/rust-linux-darwin-builder:1.92.0 \
+      brhoades2/rust-linux-darwin-builder:1.92.0 \
         sh -c "cargo build --release --target aarch64-apple-darwin"
 ```
 
@@ -107,7 +106,7 @@ It's known that the [`CARGO_HOME`](https://doc.rust-lang.org/cargo/guide/cargo-h
 You can also use the image as a base for your Dockerfile:
 
 ```Dockerfile
-FROM joseluisq/rust-linux-darwin-builder:1.92.0
+FROM brhoades2/rust-linux-darwin-builder:1.92.0
 ```
 
 ### OSXCross
@@ -150,7 +149,7 @@ compile:
 	@docker run --rm -it \
 		-v $(PWD):/app/src \
 		-w /app/src \
-			joseluisq/rust-linux-darwin-builder:1.92.0 \
+			brhoades2/rust-linux-darwin-builder:1.92.0 \
 				make cross-compile
 .PHONY: compile
 
@@ -194,7 +193,7 @@ For more details take a look at [Cross-compiling Rust from Linux to macOS](https
 
 ### Macos ARM64
 
-See [joseluisq/rust-linux-darwin-builder#7](https://github.com/joseluisq/rust-linux-darwin-builder/issues/7)
+See [brhoades2/rust-linux-darwin-builder#7](https://github.com/joseluisq/rust-linux-darwin-builder/issues/7)
 
 ### Building *-sys crates
 
@@ -220,7 +219,7 @@ CXX=o64-clang++ \
 
 Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in current work by you, as defined in the Apache-2.0 license, shall be dual licensed as described below, without any additional terms or conditions.
 
-Feel free to send some [Pull request](https://github.com/joseluisq/rust-linux-darwin-builder/pulls) or file an [issue](https://github.com/joseluisq/rust-linux-darwin-builder/issues).
+Feel free to send some [Pull request](https://github.com/brhoades2/rust-linux-darwin-builder/pulls) or file an [issue](https://github.com/joseluisq/rust-linux-darwin-builder/issues).
 
 ## License
 
